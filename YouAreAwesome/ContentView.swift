@@ -9,45 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var messageString = "Namaste"
-    
+    @State private var messageString = ""
     
     var body: some View {
         
         VStack {
-                   
+            
             Spacer()
-            
-//            Image(systemName: "cloud.sun.rain.fill")
-//                .resizable()
-//                .scaledToFit()
-//                .symbolRenderingMode(.multicolor)
-//                .padding()
-//                .background(Color(hue: 0.521, saturation: 0.299, brightness: 0.958))
-//                .cornerRadius(30)
-//                .shadow(color: .teal, radius: 30, x: 20, y: 20)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 30)
-//                        .stroke(.teal, lineWidth: 1)
-//                )
-//                .padding()
-                
-             
-            Image(systemName: "speaker.wave.2", variableValue: 0.55)
-                .resizable()
-                .scaledToFit()
-                .symbolRenderingMode(.multicolor)
-                .padding()
-                .background(Color(hue: 0.521, saturation: 0.299, brightness: 0.958))
-                .cornerRadius(30)
-                .shadow(color: .teal, radius: 30, x: 20, y: 20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(.teal, lineWidth: 1)
-                )
-                .padding()
-            
-            
             
             Text(messageString)
                 .font(.largeTitle)
@@ -58,28 +26,37 @@ struct ContentView: View {
                 .frame(height: 150)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
-                            
-            Spacer()
             
-            HStack {
-                
-                Button("Awesome") {
-                    // Action performed when button is pressed.
-                    messageString = "You Are Awesome!"
-                    
-                }  // Button
-                .buttonStyle(.borderedProminent)
-                
-                Spacer()
-                
-                Button("Great") {
-                    // Action performed when button is pressed.
-                    messageString = "You Are Great!"
-                    
-                }  // Button
-                .buttonStyle(.borderedProminent)
+            Spacer()
+                        
+            Button("Show Message") {
+                let message1 = "You Are Awesome!"
+                let message2 = "You Are Great!"
                                 
-            }  // HStack
+                if messageString == message1
+                {
+                    messageString = message2
+                } else {
+                    messageString = message1
+                }
+            }  // Button
+            .buttonStyle(.borderedProminent)
+            
+            
+            
+            //                Button("Awesome") {
+            //                    messageString = "You Are Awesome!"
+            //                }  // Button
+            //                .buttonStyle(.borderedProminent)
+            //
+            //                Spacer()
+            //
+            //                Button("Great") {
+            //                    messageString = "You Are Great!"
+            //                }  // Button
+            //                .buttonStyle(.borderedProminent)
+            
+            
             .padding()
             
         }  // VStack
