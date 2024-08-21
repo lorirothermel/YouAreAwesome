@@ -13,50 +13,69 @@ struct ContentView: View {
     
     
     var body: some View {
-        
-        VStack {
+                  
+        GeometryReader { geo in
             
-            Text(messageString)
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-                .minimumScaleFactor(0.5)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.red)
-                .frame(height: 150)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .border(.orange, width: 1)
-                .padding()
-            
-            HStack {
-            
-                Button("Awesome") {
-                    // Action performed when button is pressed.
-                    messageString = "You Are Awesome!"
+            VStack {
+                               
+                    Spacer()
                     
-                }  // Button
-                .buttonStyle(.borderedProminent)
-                
-                Button("Great") {
-                    // Action performed when button is pressed.
-                    messageString = "You Are Great!"
+                    Text(messageString)
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .minimumScaleFactor(0.5)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.red)
+                        .frame(height: 150)
+                        .frame(maxWidth: .infinity, alignment: .center)
+         //               .border(.orange, width: 1)
+                        .padding()
                     
-                }  // Button
-                .buttonStyle(.borderedProminent)
-                                
-                .buttonStyle(.borderedProminent)
-                
-                
-            }  // HStack
+                    Spacer()
+                        
+                    Divider()
+                        .background(.red)
+                        .padding()
+                        .frame(width: 350.0)
+                        
+                    Rectangle()
+                        .fill(.indigo)
+                        .frame(width: geo.size.width * (2/3), height: 3)
+                    
+                    
+                    HStack {
+                    
+                        Button("Awesome") {
+                            // Action performed when button is pressed.
+                            messageString = "You Are Awesome!"
+                            
+                        }  // Button
+                        .buttonStyle(.borderedProminent)
+                        
+                        Spacer()
+                                            
+                        Button("Great") {
+                            // Action performed when button is pressed.
+                            messageString = "You Are Great!"
+                            
+                        }  // Button
+                        .buttonStyle(.borderedProminent)
+                                        
+                        .buttonStyle(.borderedProminent)
+                        
+                        
+                    }  // HStack
+                    
+        //            .border(.black, width: 5)
+                    .padding()
+                    
+            }  // VStack
             
-            .border(.black, width: 5)
-   
+        }  // GeoReader
             
-        }  // VStack
-           
-                             
-            
+
         
-        
+  
         
     }  // some View
 }  // View
