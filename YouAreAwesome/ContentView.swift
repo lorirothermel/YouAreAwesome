@@ -9,40 +9,45 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var messageString = "When the Genius Bar needs help, they call you!"
+    @State private var messageString = "Namaste"
     
     
     var body: some View {
         
         VStack {
-            
-            Group {
-                Text("I'm am a Text View #1")
-                Text("I'm am a Text View #2")
-                Text("I'm am a Text View #3")
-                Text("I'm am a Text View #4")
-                Text("I'm am a Text View #5")
-                Text("I'm am a Text View #6")
-                Text("I'm am a Text View #7")
-                Text("I'm am a Text View #8")
-                Text("I'm am a Text View #9")
-                Text("I'm am a Text View #10")
-                Text("I'm am a Text View #11")
-                Text("I'm am a Text View #12")
-                Text("I'm am a Text View #13")
-                Text("I'm am a Text View #14")
-                Text("I'm am a Text View #15")
-                Text("I'm am a Text View #16")
-                Text("I'm am a Text View #17")
-                Text("I'm am a Text View #18")
-                Text("I'm am a Text View #19")
-                Text("I'm am a Text View #20")
                    
-            }  // Group
-            .font(.title)
-            .fontWeight(.heavy)
-            
             Spacer()
+            
+//            Image(systemName: "cloud.sun.rain.fill")
+//                .resizable()
+//                .scaledToFit()
+//                .symbolRenderingMode(.multicolor)
+//                .padding()
+//                .background(Color(hue: 0.521, saturation: 0.299, brightness: 0.958))
+//                .cornerRadius(30)
+//                .shadow(color: .teal, radius: 30, x: 20, y: 20)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 30)
+//                        .stroke(.teal, lineWidth: 1)
+//                )
+//                .padding()
+                
+             
+            Image(systemName: "speaker.wave.2", variableValue: 0.55)
+                .resizable()
+                .scaledToFit()
+                .symbolRenderingMode(.multicolor)
+                .padding()
+                .background(Color(hue: 0.521, saturation: 0.299, brightness: 0.958))
+                .cornerRadius(30)
+                .shadow(color: .teal, radius: 30, x: 20, y: 20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(.teal, lineWidth: 1)
+                )
+                .padding()
+            
+            
             
             Text(messageString)
                 .font(.largeTitle)
@@ -52,9 +57,8 @@ struct ContentView: View {
                 .foregroundColor(.red)
                 .frame(height: 150)
                 .frame(maxWidth: .infinity, alignment: .center)
-            //               .border(.orange, width: 1)
                 .padding()
-            
+                            
             Spacer()
             
             HStack {
@@ -74,13 +78,8 @@ struct ContentView: View {
                     
                 }  // Button
                 .buttonStyle(.borderedProminent)
-                
-                .buttonStyle(.borderedProminent)
-                
-                
+                                
             }  // HStack
-            
-            //            .border(.black, width: 5)
             .padding()
             
         }  // VStack
