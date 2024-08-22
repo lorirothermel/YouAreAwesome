@@ -10,11 +10,21 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var messageString = ""
+    @State private var imageName = ""
+    @State private var imageNumber = 0
     
+        
     var body: some View {
         
         VStack {
             
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(30)
+                .shadow(radius: 30)
+                .padding()
+                       
             Spacer()
             
             Text(messageString)
@@ -33,33 +43,18 @@ struct ContentView: View {
                 let message1 = "You Are Awesome!"
                 let message2 = "You Are Great!"
                                 
-//                if messageString == message1
-//                {
-//                    messageString = message2
-//                } else {
-//                    messageString = message1
-//                }
-                
                 messageString = (messageString == message1 ? message2 : message1)
                 
+                //TODO: Update the imageName variable
+                imageName = "image\(imageNumber)"
+                imageNumber = imageNumber + 1
+                
+                if imageNumber > 9 {
+                    imageNumber = 0
+                }
             }  // Button
             .buttonStyle(.borderedProminent)
-            
-            
-            
-            //                Button("Awesome") {
-            //                    messageString = "You Are Awesome!"
-            //                }  // Button
-            //                .buttonStyle(.borderedProminent)
-            //
-            //                Spacer()
-            //
-            //                Button("Great") {
-            //                    messageString = "You Are Great!"
-            //                }  // Button
-            //                .buttonStyle(.borderedProminent)
-            
-            
+ 
             .padding()
             
         }  // VStack
