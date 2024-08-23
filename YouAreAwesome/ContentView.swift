@@ -13,8 +13,7 @@ struct ContentView: View {
     @State private var imageName = ""
     @State private var imageNumber = 0
     @State private var messageNumber = 0
-    
-    
+       
         
     var body: some View {
         
@@ -26,7 +25,7 @@ struct ContentView: View {
                 .cornerRadius(30)
                 .shadow(radius: 30)
                 .padding()
-                       
+            
             Spacer()
             
             Text(messageString)
@@ -40,39 +39,31 @@ struct ContentView: View {
                 .padding()
             
             Spacer()
-                        
+            
             Button("Show Message") {
-            
+                
                 let messages: [String] = [
-                                "Image Number -> 0",
-                                "Image Number -> 1",
-                                "Image Number -> 2",
-                                "Image Number -> 3",
-                                "Image Number -> 4",
-                                "Image Number -> 5",
-                                "Image Number -> 6",
-                                "Image Number -> 7",
-                                "Image Number -> 8",
-                                "Image Number -> 9"  ]
-
+                    "Random Phrase 0",
+                    "Random Phrase 1",
+                    "Random Phrase 2",
+                    "Random Phrase 3",
+                    "Random Phrase 4",
+                    "Random Phrase 5",
+                    "Random Phrase 6",
+                    "Random Phrase 7",
+                    "Random Phrase 8",
+                    "Random Phrase 9"  ]
+                
+                messageNumber = Int.random(in: 0...messages.count-1)
                 messageString = messages[messageNumber]
-                messageNumber += 1
-                                 
-                if messageNumber == messages.count {
-                    messageNumber = 0
-                }  // If Statement
-                
-                imageName = "image\(imageNumber)"
-                imageNumber = imageNumber + 1
-                
-                if imageNumber > 9 {
-                    imageNumber = 0
-                }
-            }  // Button
-            .buttonStyle(.borderedProminent)
- 
-            .padding()
+               
+                imageName = "image\(Int.random(in: 0...9))"
             
+        }  // Button
+        .buttonStyle(.borderedProminent)
+        
+        .padding()
+    
         }  // VStack
         
     }  // some View
