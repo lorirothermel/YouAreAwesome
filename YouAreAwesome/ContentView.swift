@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var messageString = ""
     @State private var imageName = ""
     @State private var imageNumber = 0
+    @State private var messageNumber = 0
+    
     
         
     var body: some View {
@@ -40,12 +42,26 @@ struct ContentView: View {
             Spacer()
                         
             Button("Show Message") {
-                let message1 = "You Are Awesome!"
-                let message2 = "You Are Great!"
-                                
-                messageString = (messageString == message1 ? message2 : message1)
+            
+                let messages: [String] = [
+                                "Image Number -> 0",
+                                "Image Number -> 1",
+                                "Image Number -> 2",
+                                "Image Number -> 3",
+                                "Image Number -> 4",
+                                "Image Number -> 5",
+                                "Image Number -> 6",
+                                "Image Number -> 7",
+                                "Image Number -> 8",
+                                "Image Number -> 9"  ]
+
+                messageString = messages[messageNumber]
+                messageNumber += 1
+                                 
+                if messageNumber == messages.count {
+                    messageNumber = 0
+                }  // If Statement
                 
-                //TODO: Update the imageName variable
                 imageName = "image\(imageNumber)"
                 imageNumber = imageNumber + 1
                 
