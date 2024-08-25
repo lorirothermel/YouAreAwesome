@@ -13,20 +13,12 @@ struct ContentView: View {
     @State private var imageName = ""
     @State private var imageNumber = 0
     @State private var messageNumber = 0
-       
+    @State private var lastMessageNumber = -1
+    @State private var lastImageNumber = -1
         
     var body: some View {
         
         VStack {
-            
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(30)
-                .shadow(radius: 30)
-                .padding()
-            
-            Spacer()
             
             Text(messageString)
                 .font(.largeTitle)
@@ -38,8 +30,15 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
             
-            Spacer()
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(30)
+                .shadow(radius: 30)
+                .padding()
             
+            Spacer()
+                       
             Button("Show Message") {
                 
                 let messages: [String] = [
@@ -54,14 +53,37 @@ struct ContentView: View {
                     "Random Phrase 8",
                     "Random Phrase 9"  ]
                 
-                messageNumber = Int.random(in: 0...messages.count-1)
+                /*
+                    Generate a random messageNumber to use as an index.
+                    If messageNumber == lastMessageNumber -
+                        Keep generating a new random messageNumber
+                        until you get a messageNumber != lastMessageNumber.
+                    Set messageString to messages[messageNumber].
+                    Update the lastMessageNumber with messageNumber.
+                                 
+                 */
+                
+                var messageNumber = Int.random(in: 0...messages.count-1)
+                
+                while messageNumber == lastMessageNumber {
+                    messageNumber = Int.random(in: 0...messages.count-1)
+                }
+                               
                 messageString = messages[messageNumber]
-               
-                imageName = "image\(Int.random(in: 0...9))"
-            
+                lastMessageNumber = messageNumber
+                
+                var imageNumber = Int.random(in: 0...9)
+                
+                while imageNumber == lastImageNumber {
+                    imageNumber = Int.random(in: 0...9)
+                }
+                
+                imageName = "image\(imageNumber)"
+                lastImageNumber = imageNumber
+                
         }  // Button
+            
         .buttonStyle(.borderedProminent)
-        
         .padding()
     
         }  // VStack
