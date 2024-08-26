@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFAudio
+
 
 struct ContentView: View {
     
@@ -15,7 +17,10 @@ struct ContentView: View {
     @State private var messageNumber = 0
     @State private var lastMessageNumber = -1
     @State private var lastImageNumber = -1
-        
+    @State private var audioPlayer: AVAudioPlayer!
+    @State private var lastSoundNumber = -1
+    
+    
     var body: some View {
         
         VStack {
@@ -52,43 +57,51 @@ struct ContentView: View {
                     "Random Phrase 7",
                     "Random Phrase 8",
                     "Random Phrase 9"  ]
-                
-                /*
-                    Generate a random messageNumber to use as an index.
-                    If messageNumber == lastMessageNumber -
-                        Keep generating a new random messageNumber
-                        until you get a messageNumber != lastMessageNumber.
-                    Set messageString to messages[messageNumber].
-                    Update the lastMessageNumber with messageNumber.
-                                 
-                 */
-                
-                var messageNumber = Int.random(in: 0...messages.count-1)
-                
-                while messageNumber == lastMessageNumber {
-                    messageNumber = Int.random(in: 0...messages.count-1)
-                }
                                
-                messageString = messages[messageNumber]
-                lastMessageNumber = messageNumber
                 
-                var imageNumber = Int.random(in: 0...9)
+                lastMessageNumber = nonRepeatingRandom(lastNumber: lastMessageNumber, upperBounds: messages.count-1)
+                messageString = messages[lastMessageNumber]
                 
-                while imageNumber == lastImageNumber {
-                    imageNumber = Int.random(in: 0...9)
-                }
-                
-                imageName = "image\(imageNumber)"
-                lastImageNumber = imageNumber
+                lastImageNumber = nonRepeatingRandom(lastNumber: lastImageNumber, upperBounds: 9)
+                imageName = "image\(lastImageNumber)"
+                               
+                lastSoundNumber = nonRepeatingRandom(lastNumber: lastSoundNumber, upperBounds: 5)
+                playSound(soundName: "sound\(lastSoundNumber)")
                 
         }  // Button
-            
         .buttonStyle(.borderedProminent)
         .padding()
     
         }  // VStack
         
     }  // some View
+    
+    
+    func playSound(soundName: String) {
+        guard let soundFile = NSDataAsset(name: soundName) else {
+            print("❗️Could not read file named \(soundName)")
+            return
+        }  // guard let
+        
+        do {
+            audioPlayer = try AVAudioPlayer(data: soundFile.data)
+            audioPlayer.play()
+        } catch {
+            print("ERROR: \(error.localizedDescription). Creating audioPlayer.")
+        }  // do...catch
+    }
+    
+    func nonRepeatingRandom(lastNumber: Int, upperBounds: Int) -> Int {
+        var newNumber: Int
+        repeat {
+            newNumber = Int.random(in: 0...upperBounds)
+        } while newNumber == lastNumber
+        
+        return newNumber
+        
+    }
+    
+    
 }  // View
 
 #Preview {
