@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var lastImageNumber = -1
     @State private var audioPlayer: AVAudioPlayer!
     @State private var lastSoundNumber = -1
-    
+    @State private var soundIsOn = true
     
     var body: some View {
         
@@ -43,35 +43,54 @@ struct ContentView: View {
                 .padding()
             
             Spacer()
-                       
-            Button("Show Message") {
+             
+            HStack {
                 
-                let messages: [String] = [
-                    "Random Phrase 0",
-                    "Random Phrase 1",
-                    "Random Phrase 2",
-                    "Random Phrase 3",
-                    "Random Phrase 4",
-                    "Random Phrase 5",
-                    "Random Phrase 6",
-                    "Random Phrase 7",
-                    "Random Phrase 8",
-                    "Random Phrase 9"  ]
-                               
+                Text("Sound: \(soundIsOn ? "On" : "Off")")
                 
-                lastMessageNumber = nonRepeatingRandom(lastNumber: lastMessageNumber, upperBounds: messages.count-1)
-                messageString = messages[lastMessageNumber]
+                Toggle("", isOn: $soundIsOn)
+                    .padding()
+                    .labelsHidden()
+                    .onChange(of: soundIsOn) { _, _ in
+                        if audioPlayer != nil && audioPlayer.isPlaying {
+                            audioPlayer.stop()
+                        }  // if
+                    }  // onChange
+                    .tint(.black)
                 
-                lastImageNumber = nonRepeatingRandom(lastNumber: lastImageNumber, upperBounds: 9)
-                imageName = "image\(lastImageNumber)"
-                               
-                lastSoundNumber = nonRepeatingRandom(lastNumber: lastSoundNumber, upperBounds: 5)
-                playSound(soundName: "sound\(lastSoundNumber)")
+                Button("Show Message") {
+                    let messages: [String] = [
+                        "Phrase 0",
+                        "Phrase 1",
+                        "Phrase 2",
+                        "Phrase 3",
+                        "Phrase 4",
+                        "Phrase 5",
+                        "Phrase 6",
+                        "Phrase 7",
+                        "Phrase 8",
+                        "Phrase 9"  ]
+                    
+                    
+                    lastMessageNumber = nonRepeatingRandom(lastNumber: lastMessageNumber, upperBounds: messages.count-1)
+                    messageString = messages[lastMessageNumber]
+                    
+                    lastImageNumber = nonRepeatingRandom(lastNumber: lastImageNumber, upperBounds: 9)
+                    imageName = "image\(lastImageNumber)"
+                    
+                    lastSoundNumber = nonRepeatingRandom(lastNumber: lastSoundNumber, upperBounds: 5)
+                    
+                    if soundIsOn {
+                        playSound(soundName: "sound\(lastSoundNumber)")
+                    }
+                    
+                    
+                }  // Button
+                .buttonStyle(.borderedProminent)
+                .padding()
                 
-        }  // Button
-        .buttonStyle(.borderedProminent)
-        .padding()
-    
+            }  // HStack
+            
         }  // VStack
         
     }  // some View
